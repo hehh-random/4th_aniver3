@@ -1,54 +1,75 @@
-body{
-    background:#f8f3e6;
-    font-family:Georgia,serif;
-    text-align:center;
-    color:#3b2f2f;
+body {
+    background: #f8f3e6;
+    font-family: Georgia, serif;
+    text-align: center;
+    color: #3b2f2f;
+    margin: 20px;
 }
 
-.bookshelf{
-    display:flex;
-    gap:20px;
-    justify-content:center;
-    flex-wrap:wrap;
+.bookshelf {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.book{
-    width:140px;
-    height:180px;
-    background:brown;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    border-radius:8px;
-    transition:.3s;
+.book {
+    width: 140px;
+    height: 180px;
+    background: brown;
+    color: white;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.book:hover{
-    transform:translateY(-10px);
+.book:hover {
+    transform: translateY(-10px);
 }
 
-#viewer img{
-    width:350px;
-    margin-top:20px;
+#viewer img {
+    width: 350px;
+    max-width: 90%;
+    margin-top: 20px;
+    border-radius: 10px;
 }
 
-.star{
-    position:absolute;
-    cursor:pointer;
-    font-size:30px;
+.hidden {
+    display: none;
 }
 
-.hidden{
-    display:none;
+.star {
+    position: fixed;
+    cursor: pointer;
+    font-size: 30px;
+    z-index: 999;
 }
 
-.reason{
-    display:inline-block;
-    margin:5px;
-    padding:10px;
-    background:white;
-    border:1px solid #ccc;
-    cursor:pointer;
+.reason {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#chatBox {
+    width: 90%;
+    max-width: 500px;
+    height: 200px;
+
+    margin: 10px auto;
+
+    border: 1px solid #ccc;
+    background: white;
+
+    overflow-y: auto;
+    padding: 10px;
+    text-align: left;
 }

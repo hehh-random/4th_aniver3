@@ -1,79 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>The Library Of Us</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Library Of Us</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-<div id="counter">
-    Anniversary in:
-    <span id="countdown"></span>
-</div>
-
-<h1>📚 The Library Of Us</h1>
-
-<button id="musicBtn">🎵 Start Music</button>
-
-<section class="bookshelf">
-
-    <div class="book memory"
-         data-photo="photos/memory1.jpg"
-         data-audio="audio/chapter1.mp3">
-        First Adventure
+    <div id="counter">
+        Anniversary in:
+        <span id="countdown"></span>
     </div>
 
-    <div class="book memory"
-         data-photo="photos/memory2.jpg"
-         data-audio="audio/chapter2.mp3">
-        Best Day Ever
+    <h1>📚 The Library Of Us</h1>
+
+    <button id="musicBtn">🎵 Start Music</button>
+
+    <section class="bookshelf">
+
+        <div class="book memory"
+            data-name="First Adventure"
+            data-photo="images/adventure.jpg"
+            data-audio="audio/chapter1.mp3">
+            First Adventure
+        </div>
+
+        <div class="book memory"
+            data-name="Best Day Ever"
+            data-photo="images/bestday.jpg"
+            data-audio="audio/chapter2.mp3">
+            Best Day Ever
+        </div>
+
+        <div class="book secret">
+            🔒 Secret Book
+        </div>
+
+    </section>
+
+    <section id="viewer"></section>
+
+    <h2>🏆 Achievements</h2>
+    <div id="achievements"></div>
+
+    <h2>🎲 Mystery Book</h2>
+    <button id="randomBtn">Open Mystery</button>
+    <p id="randomText"></p>
+
+    <h2>💬 Future Us</h2>
+
+    <div id="chatBox"></div>
+
+    <input
+        id="message"
+        type="text"
+        placeholder="Type a message..."
+    >
+
+    <button id="send">Send</button>
+
+    <h2>📖 100 Reasons I Love You</h2>
+    <div id="reasons"></div>
+
+    <div id="loveLetter" class="hidden">
+        <h2>❤️ Secret Letter</h2>
+        <p>
+            You found all the stars...
+        </p>
     </div>
 
-    <div class="book secret">
-        🔒 Secret Book
+    <div id="finalChapter" class="hidden">
+        <h1>👑 Final Chapter Unlocked</h1>
+        <p>
+            You discovered every secret in our story.
+        </p>
     </div>
 
-</section>
-
-<section id="viewer"></section>
-
-<h2>🏆 Achievements</h2>
-<div id="achievements"></div>
-
-<h2>🎲 Mystery Book</h2>
-<button id="randomBtn">Open Mystery</button>
-<p id="randomText"></p>
-
-<h2>💬 Future Us AI</h2>
-
-<div id="chatBox"></div>
-
-<input id="message">
-<button id="send">Send</button>
-
-<h2>📖 100 Reasons I Love You</h2>
-
-<div id="reasons"></div>
-
-<h2>📸 Scrapbook Room</h2>
-
-<div id="scrapbook"></div>
-
-<div id="loveLetter" class="hidden">
-<h2>❤️ Secret Letter</h2>
-<p>
-You found all the stars...
-</p>
-</div>
-
-<div id="finalChapter" class="hidden">
-<h1>👑 Final Chapter Unlocked</h1>
-<p>
-You discovered every secret in our story.
-</p>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>

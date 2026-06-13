@@ -3,10 +3,6 @@ const achievements = [];
 
 let starsFound = 0;
 
-// ---------------------
-// DOM ELEMENTS
-// ---------------------
-
 const viewer = document.getElementById("viewer");
 const achievementsBox = document.getElementById("achievements");
 const randomBtn = document.getElementById("randomBtn");
@@ -20,132 +16,84 @@ const chatBox = document.getElementById("chatBox");
 const messageInput = document.getElementById("message");
 const sendBtn = document.getElementById("send");
 
-// ---------------------
-// BACKGROUND MUSIC
-// ---------------------
+/* ---------------- MUSIC ---------------- */
 
 const bgMusic = new Audio("audio/music.mp3");
 bgMusic.loop = true;
 
 musicBtn.addEventListener("click", async () => {
-try {
-await bgMusic.play();
-musicBtn.innerText = "🎵 Music Playing";
-} catch (err) {
-console.error(err);
-}
-});
-
-// ---------------------
-// MEMORY BOOKS
-// ---------------------
-
-const memories = document.querySelectorAll(".memory");
-
-memories.forEach(book => {
-book.addEventListener("click", () => {
-
-```
-    const photo = book.dataset.photo;
-    const audio = book.dataset.audio;
-
-    viewer.innerHTML = `
-        <img src="${photo}" alt="${book.innerText}">
-    `;
-
     try {
-        new Audio(audio).play();
+        await bgMusic.play();
+        musicBtn.textContent = "🎵 Music Playing";
     } catch (err) {
         console.error(err);
     }
-
-    unlock(book.innerText.trim());
-});
-```
-
 });
 
-// ---------------------
-// ACHIEVEMENTS
-// ---------------------
+/* ---------------- ACHIEVEMENTS ---------------- */
 
 function unlock(name) {
 
-```
-if (visited.has(name)) return;
+    if (visited.has(name)) return;
 
-visited.add(name);
+    visited.add(name);
 
-achievements.push(`📚 Explored: ${name}`);
+    achievements.push(`📚 Explored: ${name}`);
 
-renderAchievements();
-checkFinal();
-```
-
+    renderAchievements();
+    checkFinal();
 }
 
 function renderAchievements() {
 
-```
-achievementsBox.innerHTML =
-    achievements
-        .map(item => `<div>${item}</div>`)
+    achievementsBox.innerHTML = achievements
+        .map(a => `<div>${a}</div>`)
         .join("");
-```
-
 }
 
 function checkFinal() {
 
-```
-const required = [
-    "First Adventure",
-    "Best Day Ever",
-    "Secret Book",
-    "Star Hunter"
-];
+    const required = [
+        "First Adventure",
+        "Best Day Ever",
+        "Secret Book",
+        "Star Hunter"
+    ];
 
-const complete =
-    required.every(item => visited.has(item));
+    const complete = required.every(item =>
+        visited.has(item)
+    );
 
-if (complete) {
-    finalChapter.classList.remove("hidden");
-}
-```
-
+    if (complete) {
+        finalChapter.classList.remove("hidden");
+    }
 }
 
-// ---------------------
-// RANDOM MEMORY MESSAGES
-// ---------------------
+/* ---------------- MEMORY BOOKS ---------------- */
 
-const messages = [
-"I still laugh about that day.",
-"You looked amazing that night.",
-"One of my favorite memories.",
-"You're my favorite person."
-];
+document.querySelectorAll(".memory").forEach(book => {
 
-randomBtn.addEventListener("click", () => {
+    book.addEventListener("click", () => {
 
-```
-const random =
-    messages[Math.floor(Math.random() * messages.length)];
+        const photo = book.dataset.photo;
+        const audio = book.dataset.audio;
+        const name = book.dataset.name;
 
-randomText.innerText = random;
-```
+        viewer.innerHTML =
+            `<img src="${photo}" alt="${name}">`;
 
+        if (audio) {
+            new Audio(audio).play().catch(console.error);
+        }
+
+        unlock(name);
+    });
 });
 
-// ---------------------
-// SECRET BOOK
-// ---------------------
+/* ---------------- SECRET BOOK ---------------- */
 
 const secretBook = document.querySelector(".secret");
 
-if (secretBook) {
-
-```
 secretBook.addEventListener("click", () => {
 
     const answer = prompt("Password?");
@@ -158,165 +106,145 @@ secretBook.addEventListener("click", () => {
 
     } else {
 
-        alert("Wrong password.");
+        alert("Wrong password");
     }
 });
-```
 
-}
+/* ---------------- RANDOM MESSAGES ---------------- */
 
-// ---------------------
-// COUNTDOWN
-// ---------------------
+const messages = [
+    "I still laugh about that day.",
+    "You looked amazing that night.",
+    "One of my favorite memories.",
+    "You're my favorite person."
+];
 
-const targetDate = new Date("2027-04-10T00:00:00");
+randomBtn.addEventListener("click", () => {
+
+    const random =
+        messages[Math.floor(Math.random() * messages.length)];
+
+    randomText.textContent = random;
+});
+
+/* ---------------- COUNTDOWN ---------------- */
+
+const targetDate = new Date("2027-04-10");
 
 function updateCountdown() {
 
-```
-const now = new Date();
-const diff = targetDate - now;
+    const now = new Date();
 
-if (diff <= 0) {
+    const diff = targetDate - now;
 
-    countdown.innerText = "Today ❤️";
-    return;
-}
+    if (diff <= 0) {
+        countdown.textContent = "Today ❤️";
+        return;
+    }
 
-const days =
-    Math.floor(diff / (1000 * 60 * 60 * 24));
+    const days =
+        Math.floor(diff / (1000 * 60 * 60 * 24));
 
-countdown.innerText = `${days} days`;
-```
-
+    countdown.textContent = `${days} days`;
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
 
-// ---------------------
-// STAR HUNT GAME
-// ---------------------
+setInterval(updateCountdown, 60000);
+
+/* ---------------- STAR HUNT ---------------- */
 
 for (let i = 0; i < 5; i++) {
 
-```
-const star = document.createElement("div");
+    const star = document.createElement("div");
 
-star.className = "star";
-star.innerHTML = "⭐";
+    star.className = "star";
+    star.textContent = "⭐";
 
-star.style.left = Math.random() * 90 + "%";
-star.style.top = Math.random() * 90 + "%";
+    star.style.left =
+        Math.random() * 90 + "%";
 
-document.body.appendChild(star);
+    star.style.top =
+        Math.random() * 90 + "%";
 
-star.addEventListener("click", () => {
+    document.body.appendChild(star);
 
-    star.remove();
+    star.addEventListener("click", () => {
 
-    starsFound++;
+        star.remove();
 
-    if (starsFound === 5) {
+        starsFound++;
 
-        loveLetter.classList.remove("hidden");
+        if (starsFound === 5) {
 
-        unlock("Star Hunter");
-    }
-});
-```
+            loveLetter.classList.remove("hidden");
 
+            unlock("Star Hunter");
+        }
+    });
 }
 
-// ---------------------
-// 100 REASONS
-// ---------------------
+/* ---------------- REASONS ---------------- */
 
 const reasonsList = Array.from(
-{ length: 100 },
-(_, i) => `Reason #${i + 1}: You make life better.`
+    { length: 100 },
+    (_, i) =>
+        `Reason #${i + 1}: You make life better.`
 );
 
-for (let i = 1; i <= 100; i++) {
+for (let i = 0; i < 100; i++) {
 
-```
-const book = document.createElement("div");
+    const book = document.createElement("div");
 
-book.className = "reason";
-book.innerText = `Book ${i}`;
+    book.className = "reason";
+    book.textContent = `Book ${i + 1}`;
 
-book.addEventListener("click", () => {
-    alert(reasonsList[i - 1]);
-});
-
-reasons.appendChild(book);
-```
-
-}
-
-// ---------------------
-// AI CHAT
-// ---------------------
-
-async function askAI(message) {
-
-```
-try {
-
-    const res = await fetch("/chat", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            message
-        })
+    book.addEventListener("click", () => {
+        alert(reasonsList[i]);
     });
 
-    const data = await res.json();
-
-    return data.reply;
-
-} catch (err) {
-
-    console.error(err);
-
-    return "Sorry, I couldn't respond right now.";
-}
-```
-
+    reasons.appendChild(book);
 }
 
-sendBtn.addEventListener("click", async () => {
+/* ---------------- CHAT ---------------- */
 
-```
-const text = messageInput.value.trim();
+function addMessage(sender, text) {
 
-if (!text) return;
+    const div = document.createElement("div");
 
-chatBox.innerHTML += `
-    <div><strong>You:</strong> ${text}</div>
-`;
+    div.innerHTML =
+        `<strong>${sender}:</strong> ${text}`;
 
-messageInput.value = "";
+    chatBox.appendChild(div);
 
-const reply = await askAI(text);
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+}
 
-chatBox.innerHTML += `
-    <div><strong>Future Us:</strong> ${reply}</div>
-`;
+sendBtn.addEventListener("click", () => {
 
-chatBox.scrollTop = chatBox.scrollHeight;
-```
+    const text =
+        messageInput.value.trim();
 
+    if (!text) return;
+
+    addMessage("You", text);
+
+    messageInput.value = "";
+
+    setTimeout(() => {
+
+        addMessage(
+            "Future Us",
+            "I love remembering our adventures ❤️"
+        );
+
+    }, 500);
 });
 
-messageInput.addEventListener("keydown", async (e) => {
+messageInput.addEventListener("keydown", e => {
 
-```
-if (e.key === "Enter") {
-    sendBtn.click();
-}
-```
-
+    if (e.key === "Enter") {
+        sendBtn.click();
+    }
 });
